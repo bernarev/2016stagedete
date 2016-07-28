@@ -1,11 +1,13 @@
-path = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Scripts/systemCharacteristics.txt';
+filename = '/home/ebernardes/Área de Trabalho/Mesures/160318.txt';
 
-fileID = fopen(path);
+fileID = fopen(filename);
 	
 % read measures as strings
-pattern = '%s %f';
+pattern = '%s %s %s';
 rawData = textscan(fileID,pattern);
-    
-% extraction of variables' names
-variables = myCell2Mat(rawData{1});
-values = rawData{2};
+rawTime = cell2mat(rawData{2});
+
+time.day = str2num(rawTime(:,1:2));
+    time.month = str2num(rawTime(:,4:5));
+    time.year = str2num(rawTime(:,7:8));
+    time.hour = str2num(rawTime(:,10:13));

@@ -10,7 +10,11 @@
 %	
 %	-> outputs = 	
 %		-> pow  - ARRAY OF FLOATS with measures of power (in dB)
-%		-> time - ARRAY OF STRINGS with dates of measures
+%		-> time - ARRAY OF STRUCT with time of measures
+%           time.day    - day of measure
+%           time.month  - month of measure
+%           time.year   - year of measure
+%           time.hour   - hour of measure
 %		-> att  - ARRAY OF FLOATS with attenuation levels of each measure
 %									 
 %	-> MATLAB version used:	
@@ -27,10 +31,11 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2
+% 	Code version:	3
 %   - v2: addition of "myCell2Mat.m" script
+%   - v3: substitution of string "time" type for struct
 %
-%	last edited in:	25/07/2016 					 
+%	last edited in:	28/07/2016 					 
 %									 
 %*********************************************************************** 
 
@@ -46,9 +51,14 @@ function [pow,time,att] = readMeasures(filename)
     % extraction of "power" float array    
     pow = myCell2Mat(rawData{1});
 
-    % extraction of "time" string array    
+    % extraction of "time" struct array    
     time = rawData{2};
-    time = cell2mat(time);
+    rawTime = cell2mat(rawData{2});
+
+    time.day = str2num(rawTime(:,1:2));
+    time.month = str2num(rawTime(:,4:5));
+    time.year = str2num(rawTime(:,7:8));
+    time.hour = str2num(rawTime(:,10:13));
     
     % extraction of "attenuation" float array    
     att = myCell2Mat(rawData{3});

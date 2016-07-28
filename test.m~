@@ -1,0 +1,8 @@
+filename = '/home/ebernardes/Área de Trabalho/Mesures/160318.txt';
+
+fileID = fopen(filename);
+	
+% read measures as strings
+pattern = '%s %s %s';
+rawData = textscan(fileID,pattern);
+rawTime = rawData{2};
