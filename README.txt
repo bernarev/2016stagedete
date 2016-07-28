@@ -2,7 +2,7 @@
 -	-> This directory contains MATLAB code for the summer internship projet:	-
 -	Mesure statistique de l'appatitoin des phénomènes de propagation anormale 	-
 -	entre un émetteur constant et un récepteur basé à Rambouillet			-
------------------------------------------------------------------------------------------								 
+-----------------------------------------------------------------------------------------
 -	-> MATLAB version used:								-
 -		- R2012b (8.0.0.783) 64-bit						-
 -					 						-
