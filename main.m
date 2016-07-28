@@ -20,9 +20,9 @@
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
 % 	Code version:	7
-%       - "getCDF.m" deprecated in favor of Statistics Toolbox's
+%       - v6: "getCDF.m" deprecated in favor of Statistics Toolbox's
 %       pre-built function
-%       - creation of "systemLinkBudget.m" with system characterists for
+%       - v7: creation of "systemLinkBudget.m" with system characterists for
 %       cleaner code
 %
 %	last edited in:	27/07/2016 					 
@@ -33,13 +33,14 @@
 % enter files location and date desired
 % year, month and day should be either a two-digit string, 
 % or an empty string for wildcard (for multiples files)
-path = '/home/ebernardes/Área de Trabalho/Mesures/';
+configFile = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Codes/systemCharacteristics.txt';
+dataPath = '/home/ebernardes/Área de Trabalho/Mesures/';
 year = '16';
 month = '07';
 day = '';
 
-img1 = sprintf('%s%s%s%s_cdf', path,year,month,day);
-img2 = sprintf('%s%s%s%s_pdf', path,year,month,day);
+img1 = sprintf('%s%s%s%s_cdf', dataPath,year,month,day);
+img2 = sprintf('%s%s%s%s_pdf', dataPath,year,month,day);
 
 % checking for "wildcard" option
 if(isempty(year))
@@ -49,9 +50,11 @@ if(isempty(month))
 if(isempty(day))
     day = '**'; end
 
+[pow,time,att] = readAllMeasures(dataPath,year,month,day);
+
 % loss calculations following the characteristics of the system
 % -> read "systemLinkBudget.m" for details
-AirLosse = systemLinkBudget(pow,att);
+AirLosse = systemLinkBudget(pow,att,configFile);
 
 % calculation of probability functions with Statistics toolbox
 [cdf,xi] = ecdf(AirLosse);

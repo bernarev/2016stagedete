@@ -1,0 +1,6 @@
+Power 				55            
+Losses_at_Cables		01       
+Transmission_Antenna_Gain	30  
+Reception_Antenna_Gain		24   
+F				3.5                
+Amplifier			24.3

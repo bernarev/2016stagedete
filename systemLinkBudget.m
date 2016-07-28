@@ -3,9 +3,11 @@
 %	-- Simple script with all the chracteristic values of the system
 %
 %	-> Usage = 
-%		-> AirLoss = systemLinkBudget(pow,att)
+%		-> AirLoss = systemLinkBudget(pow,att,system)
 %
 %	-> inputs =
+%       -> system - STRING pointing to the path of the .txt file that
+%       stores the system characteristics
 %		-> pow  - ARRAY OF FLOATS with measures of power (in dB)
 %		-> att  - ARRAY OF FLOATS with attenuation levels of each measure
 %	
@@ -26,20 +28,30 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	1
+% 	Code version:	2
+%   - v2: addition config file as parameter
 %
 %	last edited in:	27/07/2016 					 
 %									 
 %*********************************************************************** 
-function AirLoss = systemLinkBudget(pow,att)
+function AirLoss = systemLinkBudget(pow,att,system)
+
+    fileID = fopen(system);
+	
+    % read measures as strings
+	pattern = '%s %f';
+    rawData = textscan(fileID,pattern);
+    
+    % extraction of variables   
+    values = rawData{2};
 
     % ---- link budget (bilan de liaison) ----
-    power = 55;             % power generated (dBW)
-    lossCables = 1;         % losses at the cables (dB)
-    transAntennaPow = 30;   % gain of the emission antenna (dB)
-    recepAntennaPow = 24;   % gain of the reception antenna (dBi)
-    F = 3.5;                %
-    amp = 24.3;             % reception amplification (dB)
+    power = values(1);             % power generated (dBW)
+    lossCables = values(2);        % losses at the cables (dB)
+    transAntennaPow = values(3);   % gain of the emission antenna (dB)
+    recepAntennaPow = values(4);   % gain of the reception antenna (dBi)
+    F = values(5);                 %
+    amp = values(6);               % reception amplification (dB)
 
     % ---- Link budget calculation ----
     % pow = power - lossCables + transAntennaPow - AIRLOSS + recepAntennaPow...
