@@ -1,6 +1,6 @@
 %*********************************************************************** 
 %									 
-%	-- Simple script with all the chracteristic values of the system
+%	-- Simple script that loads all the chracteristic values of the system
 %
 %	-> Usage = 
 %		-> AirLoss = systemLinkBudget(pow,att,system)
