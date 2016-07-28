@@ -37,7 +37,7 @@
 -											-
 -	- systemCharacteristics.txt							-
 -		Keeps system characteristics (data order MUST NOT BE CHANGED		-
------------------------------------------------------------------------------------------									 
+-----------------------------------------------------------------------------------------
 -	-> Created by Evandro Bernardes	 						-
 -		- at ENSTA Bretagne (Brest, Britanny, France)				- -								 			-
 -		- In association with: 							-
