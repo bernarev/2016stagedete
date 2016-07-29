@@ -34,13 +34,14 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	1
+% 	Code version:	2
+%   - v2: correction of "time" struct
 %
-%	last edited in:	26/07/2016 					 
+%	last edited in:	29/07/2016 					 
 %									 
 %***********************************************************************
 
-function [pow,time,att] = readAllMeasures(path,year,month,day)
+function [pow,time,att,fileNames] = readAllMeasures(path,year,month,day)
 
     selectedFiles = sprintf('%s%s%s%s.txt', path, year, month, day);
 
@@ -52,8 +53,9 @@ function [pow,time,att] = readAllMeasures(path,year,month,day)
     end
 
     pow = [];
-    time = [];
     att = [];
+    
+    time = struct('hour',[],'minute',[],'second',[]);
 
     for i = 1:n
 
@@ -61,7 +63,11 @@ function [pow,time,att] = readAllMeasures(path,year,month,day)
         [ithPow,ithTime,ithAtt] = readMeasures(ithFilePath);
 
         pow = [pow;ithPow];
-        time = [time;ithTime];
         att = [att;ithAtt];
+        
+        time.hour = [time.hour;ithTime.hour];
+        time.minute = [time.minute;ithTime.minute];
+        time.second = [time.second;ithTime.second];
+        
     end
 end

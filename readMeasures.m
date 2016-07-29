@@ -11,10 +11,9 @@
 %	-> outputs = 	
 %		-> pow  - ARRAY OF FLOATS with measures of power (in dB)
 %		-> time - ARRAY OF STRUCT with time of measures
-%           time.day    - day of measure
-%           time.month  - month of measure
-%           time.year   - year of measure
-%           time.hour   - hour of measure
+%           time.hour    - day of measure
+%           time.minute  - month of measure
+%           time.second   - year of measure
 %		-> att  - ARRAY OF FLOATS with attenuation levels of each measure
 %									 
 %	-> MATLAB version used:	
@@ -31,11 +30,12 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	3
+% 	Code version:	4
 %   - v2: addition of "myCell2Mat.m" script
 %   - v3: substitution of string "time" type for struct
+%   - v4: correction of "time" struct
 %
-%	last edited in:	28/07/2016 					 
+%	last edited in:	29/07/2016 					 
 %									 
 %*********************************************************************** 
 
@@ -52,13 +52,14 @@ function [pow,time,att] = readMeasures(filename)
     pow = myCell2Mat(rawData{1});
 
     % extraction of "time" struct array    
-    time = rawData{2};
     rawTime = cell2mat(rawData{2});
-
-    time.day = str2num(rawTime(:,1:2));
-    time.month = str2num(rawTime(:,4:5));
-    time.year = str2num(rawTime(:,7:8));
-    time.hour = str2num(rawTime(:,10:13));
+    
+    hour = str2num(rawTime(:,1:2));
+    minute = str2num(rawTime(:,4:5));
+    second = str2num(rawTime(:,7:8));
+    %time.x = str2num(rawTime(:,10:13));
+    
+    time = struct('hour',hour,'minute',minute,'second',second);
     
     % extraction of "attenuation" float array    
     att = myCell2Mat(rawData{3});

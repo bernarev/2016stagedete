@@ -24,7 +24,7 @@
 %       pre-built function
 %       - v7: creation of "systemLinkBudget.m" with system characterists for
 %       cleaner code
-%
+%%   - v4: correction of "time" struct
 %	last edited in:	27/07/2016 					 
 %									 
 %*********************************************************************** 
