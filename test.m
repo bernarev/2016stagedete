@@ -9,3 +9,6 @@ day = '*';
 
 [data,fileNames] = readAllMeasures(path,year,month,day);
 
+time = data.time.hour;
+t1 = 10;
+t2 = 15;

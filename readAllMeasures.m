@@ -18,9 +18,12 @@
 %       -> data  - STRUC, containing the following 3 elements:
 %          = pow  - ARRAY OF FLOATS with measures of power (in dB)
 %          = time - ARRAY OF STRUCT with time of measures
-%                   time.hour    - day of measure
-%                   time.minute  - month of measure
-%                   time.second   - year of measure
+%                   time.year     - year of measure
+%                   time.month    - month of measure
+%                   time.day      - day of measure
+%                   time.hour     - hour of measure
+%                   time.minute   - minute of measure
+%                   time.second   - second of measure
 %          = att  - ARRAY OF FLOATS with attenuation levels of each measure
 %
 %       -> fileNames ARRAY OF STRINGS with names of loaded files
@@ -40,16 +43,17 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	3
+% 	Code version:	4
 %   - v2: correction of "time" struct
 %   - v3: definition of "data" struct
+%   - v4: insertion of date in "time" struct
 %
 %	last edited in:	04/08/2016 					 
 %									 
 %***********************************************************************
 
 function [data,fileNames] = readAllMeasures(path,year,month,day)
-
+    %% load files
     selectedFiles = sprintf('%s%s%s%s.txt', path, year, month, day);
 
     files = dir(selectedFiles);
@@ -58,10 +62,14 @@ function [data,fileNames] = readAllMeasures(path,year,month,day)
     for i=1:n
         fileNames = [fileNames; files(i).name];
     end
-
+    
+    %% initialize vectors
     pow = [];
     att = [];
     
+    year = [];
+    month = [];
+    day = [];
     hour = [];
     minute = [];
     second = [];
@@ -74,13 +82,16 @@ function [data,fileNames] = readAllMeasures(path,year,month,day)
         pow = [pow;ithData.pow];
         att = [att;ithData.att];
         
+        year = [year;ithData.time.year];
+        month = [month;ithData.time.month];
+        day = [day;ithData.time.day];
         hour = [hour;ithData.time.hour];
         minute = [minute;ithData.time.minute];
         second = [second;ithData.time.second];
         
     end
     
-    time = struct('hour',hour,'minute',minute,'second',second);
-    
+    %% final definition of data structure
+    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second);
     data = struct('pow',pow,'time',time,'att',att);
 end

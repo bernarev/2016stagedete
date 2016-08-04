@@ -2,41 +2,11 @@ file = '/home/ebernardes/Área de Trabalho/Mesures/160318.txt';
 
 %data = readMeasures(file);
 
-path = '/home/ebernardes/Área de Trabalho/Mesures/';
-year = '16';
-month = '*';
-day = '*';
+% path = '/home/ebernardes/Área de Trabalho/Mesures/';
+% year = '16';
+% month = '*';
+% day = '*';
+% 
+% [data,fileNames] = readAllMeasures(path,year,month,day);
 
-%[data,fileNames] = readAllMeasures(path,year,month,day);
-
-selectedFiles = sprintf('%s%s%s%s.txt', path, year, month, day);
-
-files = dir(selectedFiles);
-fileNames = [];
-n = length(files);
-for i=1:n
-    fileNames = [fileNames; files(i).name];
-end
-
-    pow = [];
-    att = [];
-    
-    hour = [];
-    minute = [];
-    second = [];
-    
-        for i = 1:n
-
-        ithFilePath = sprintf('%s%s', path, fileNames(i,:));
-        ithData = readMeasures(ithFilePath);
-
-        pow = [pow;ithData.pow];
-        att = [att;ithData.att];
-        
-        hour = [hour;ithData.time.hour];
-        minute = [minute;ithData.time.minute];
-        second = [second;ithData.time.second];
-        
-        end
-    
-data = struct('pow',pow,'time',time,'att',)
+newData = filterData(data,4,10,15);
