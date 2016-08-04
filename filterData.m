@@ -24,7 +24,7 @@
 %		-- none	--		
 %
 % 	-> Other dependencies:  
-%		-- none	--		
+%		- selectFilterData.m	
 %									 
 %	-> Created by Evandro Bernardes	 								 
 %		- at ENSTA Bretagne (Brest, Britanny, France)							 								 
