@@ -19,13 +19,14 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	7
+% 	Code version:	8
 %       - v6: "getCDF.m" deprecated in favor of Statistics Toolbox's
 %       pre-built function
 %       - v7: creation of "systemLinkBudget.m" with system characterists for
 %       cleaner code
+%       - v8: update for data structures
 %
-%	last edited in:	27/07/2016 					 
+%	last edited in:	04/08/2016 					 
 %									 
 %*********************************************************************** 
 
@@ -50,7 +51,9 @@ if(isempty(month))
 if(isempty(day))
     day = '**'; end
 
-[pow,time,att] = readAllMeasures(dataPath,year,month,day);
+[data,files] = readAllMeasures(dataPath,year,month,day);
+pow = data.pow;
+att = data.att;
 
 % loss calculations following the characteristics of the system
 % -> read "systemLinkBudget.m" for details
