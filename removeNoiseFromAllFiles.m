@@ -4,18 +4,16 @@
 %   and saves files at "outPath"
 %
 %	-> Usage = 
-%		-> removeNoiseFromAllFiles(inPath,outPath,limit,year,month,day)
+%		-> removeNoiseFromAllFiles(inPath,outPath,limit,date)
 %
 %	-> inputs =
 %		-> inPath     - path to raw files
 %		-> outPath    - path to new files
 %		-> limit      - noise limit
-%		-> year       - STRING defining year
-%		-> month      - STRING defining month
-%		-> day        - STRING defining day
+%		-> date       - STRING defining date in the format "YYMMDD"
 %
-%       OBS.: 'year', 'month' and 'day' must be either two-digit numbers
-%       or '' for wildcard
+%       OBS.: 'YY', 'MM' and/or 'DD' can be changed for '*' if any of 
+%       them should be a wildcard
 %								 
 %	-> MATLAB version used:	
 %		- R2012b (8.0.0.783) 64-bit	
@@ -25,29 +23,25 @@
 %
 % 	-> Other dependencies:  
 %       - selectData.m
+%       - removeNoiseFromFile.m
 %									 
 %	-> Created by Evandro Bernardes	 								 
 %		- at ENSTA Bretagne (Brest, Britanny, France)							 								 
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	1
+% 	Code version:	2
+%   - v2: no more checking and changing of parameter to "date"
+%   (more direct single string parameter)
 %
-%	last edited in:	22/08/2016 					 
+%	last edited in:	23/08/2016 					 
 %									 
 %*********************************************************************** 
 
-function removeNoiseFromAllFiles(inPath,outPath,limit,year,month,day)
-        % checking for "wildcard" option
-    if(isempty(year))
-        year = '*'; end
-    if(isempty(month))
-        month = '*'; end
-    if(isempty(day))
-        day = '*'; end
-    
+function removeNoiseFromAllFiles(inPath,outPath,limit,date)
+   
     % finding desired files
-    filesSelection = sprintf('%s%s%s%s.txt', inPath, year, month, day);
+    filesSelection = sprintf('%s%s.txt', inPath, date);
     files = dir(filesSelection);
     
     for i=1:length(files);

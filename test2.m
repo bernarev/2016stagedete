@@ -5,23 +5,24 @@ dataPath1 = '/home/ebernardes/Área de Trabalho/Mesures/filter1/';
 dataPath2 = '/home/ebernardes/Área de Trabalho/Mesures/filter2/';
 year = '16';
 month = '07';
-day = '';
+day = '*';
+date=[year month day];
 
 limit = -64;
 timeGap = 4;
 timeDev = 0.1;
 
-removeNoiseFromAllFiles(dataPath,dataPath1,limit,year,month,day);
-filterAllFiles(dataPath1,dataPath2,14,timeGap,timeDev,year,month,day);
+removeNoiseFromAllFiles(dataPath,dataPath1,limit,date);
+filterAllFiles(dataPath1,dataPath2,14,timeGap,timeDev,date);
 
 %% read raw data
-[data1,files] = readAllMeasures(dataPath,year,month,day);
+[data1,files] = readAllMeasures(dataPath,date);
 
 %% read new data
-[data2,files] = readAllMeasures(dataPath1,year,month,day);
+[data2,files] = readAllMeasures(dataPath1,date);
 
 %% read new data
-[data3,files] = readAllMeasures(dataPath2,year,month,day);
+[data3,files] = readAllMeasures(dataPath2,date);
 
 %% ---- Calculation of air losses ----
 data = data3;
