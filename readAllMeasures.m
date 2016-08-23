@@ -24,6 +24,7 @@
 %                   time.hour     - hour of measure
 %                   time.minute   - minute of measure
 %                   time.second   - second of measure
+%                   time.sample   - number of sample
 %          = att  - ARRAY OF FLOATS with attenuation levels of each measure
 %
 %       -> fileNames ARRAY OF STRINGS with names of loaded files
@@ -43,25 +44,31 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	4
+% 	Code version:	6
 %   - v2: correction of "time" struct
 %   - v3: definition of "data" struct
 %   - v4: insertion of date in "time" struct
+%   - v5: insertion of sample in "time" struct
+%   - v6: check for wildcard option
 %
-%	last edited in:	04/08/2016 					 
+%	last edited in:	22/08/2016 					 
 %									 
 %***********************************************************************
 
 function [data,fileNames] = readAllMeasures(path,year,month,day)
     %% load files
-    selectedFiles = sprintf('%s%s%s%s.txt', path, year, month, day);
+    
+    % checking for "wildcard" option
+    if(isempty(year))
+        year = '*'; end
+    if(isempty(month))
+        month = '*'; end
+    if(isempty(day))
+        day = '*'; end
+    
+    filesSelection = sprintf('%s%s%s%s.txt', path, year, month, day);
 
-    files = dir(selectedFiles);
-    fileNames = [];
-    n = length(files);
-    for i=1:n
-        fileNames = [fileNames; files(i).name];
-    end
+    files = dir(filesSelection);
     
     %% initialize vectors
     pow = [];
@@ -73,10 +80,13 @@ function [data,fileNames] = readAllMeasures(path,year,month,day)
     hour = [];
     minute = [];
     second = [];
+    sample = [];
+    
+    fileNames = {};
    
-    for i = 1:n
-
-        ithFilePath = sprintf('%s%s', path, fileNames(i,:));
+    for i = 1:length(files)
+        fileNames{i} = files(i).name;
+        ithFilePath = sprintf('%s%s', path, files(i).name);
         ithData = readMeasures(ithFilePath);
 
         pow = [pow;ithData.pow];
@@ -88,10 +98,11 @@ function [data,fileNames] = readAllMeasures(path,year,month,day)
         hour = [hour;ithData.time.hour];
         minute = [minute;ithData.time.minute];
         second = [second;ithData.time.second];
+        sample = [sample;ithData.time.sample];
         
     end
     
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second);
+    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'sample',sample);
     data = struct('pow',pow,'time',time,'att',att);
 end

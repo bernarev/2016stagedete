@@ -30,38 +30,56 @@
 %									 
 %*********************************************************************** 
 
-% ---- loading of desired data ----
+%% ---- loading of desired data ----
 % enter files location and date desired
 % year, month and day should be either a two-digit string, 
 % or an empty string for wildcard (for multiples files)
 configFile = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Codes/systemCharacteristics.txt';
 dataPath = '/home/ebernardes/Área de Trabalho/Mesures/';
 year = '16';
-month = '';
-day = '';
+month = '07';
+day = '13';
 
 img1 = sprintf('%s%s%s%s_cdf', dataPath,year,month,day);
 img2 = sprintf('%s%s%s%s_pdf', dataPath,year,month,day);
 
-% checking for "wildcard" option
-if(isempty(year))
-    year = '**'; end
-if(isempty(month))
-    month = '**'; end
-if(isempty(day))
-    day = '**'; end
 
-[data,files] = readAllMeasures(dataPath,year,month,day);
+
+[adata,files] = readAllMeasures(dataPath,year,month,day);
+
+selectionVector = adata.pow >= -64;
+filterData = selectData(adata,selectionVector);
+%% ---- test and selection of data ----
+
+%aadata = filterData(adata,3,18,13);
+separatedData = separateData(filterData,18);
+N = length(separatedData);
+ssData = {};
+i = 1;
+while(i <= N)
+    ithData = separatedData{i};
+    
+    idx = testData(ithData,4);
+    
+    ithData = selectData(ithData,idx);
+    
+    ssData{i} = ithData;
+    
+    i = i+1;
+end 
+newData = joinData(ssData);
+%% ---- Calculation of air losses ----
+data = newData;
 pow = data.pow;
 att = data.att;
 
 % loss calculations following the characteristics of the system
 % -> read "systemLinkBudget.m" for details
-AirLosse = systemLinkBudget(pow,att,configFile);
+AirLosses = systemLinkBudget(pow,att,configFile);
 
 % calculation of probability functions with Statistics toolbox
-[cdf,xi] = ecdf(AirLosse);
-[pdf,xj] = ksdensity(AirLosse);
+[cdf,xi] = ecdf(AirLosses);
+[pdf,xj] = ksdensity(AirLosses);
 
 plotTitle = sprintf('Empirical CDF \nData from:\t%s/%s/%s\n\t\tdd/mm/yy', day, month, year);
 figure(1); plot(xi,100*cdf,'r','LineWidth',2);
@@ -74,7 +92,7 @@ plotTitle = sprintf('Empirical PDF \nData from:\t%s/%s/%s\n\t\tdd/mm/yy', day, m
 figure(2); plot(xj,pdf,'LineWidth',2);
 axis([120 200 0 0.3]);
 title(plotTitle);
-xlabel('Loss in air (dB)');
+xlabel('Losses in air (dB)');
 %ylabel('Percentage of probability');
 
 %print('-f1',img1,'-dpng')
