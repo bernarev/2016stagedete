@@ -22,7 +22,7 @@
 %                   time.hour     - hour of measure
 %                   time.minute   - minute of measure
 %                   time.second   - second of measure
-%                   time.sample   - number of sample
+%                   time.tthOfMil - tenths of miliseconds
 %          = att  - ARRAY OF FLOATS with attenuation levels of each measure
 %
 %       -> fileNames ARRAY OF STRINGS with names of loaded files
@@ -42,7 +42,7 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	7
+% 	Code version:	8
 %   - v2: correction of "time" struct
 %   - v3: definition of "data" struct
 %   - v4: insertion of date in "time" struct
@@ -50,8 +50,9 @@
 %   - v6: check for wildcard option
 %   - v7: no more checking and changing of parameter to "date"
 %   (more direct single string parameter)
+%   - v8: correction of "tthOfMil" time component
 %
-%	last edited in:	23/08/2016 					 
+%	last edited in:	24/08/2016 					 
 %									 
 %***********************************************************************
 
@@ -70,7 +71,7 @@ function [data,fileNames] = readAllMeasures(path,date)
     hour = [];
     minute = [];
     second = [];
-    sample = [];
+    tthOfMil = [];
     
     fileNames = {};
    
@@ -88,10 +89,10 @@ function [data,fileNames] = readAllMeasures(path,date)
         hour = [hour;ithData.time.hour];
         minute = [minute;ithData.time.minute];
         second = [second;ithData.time.second];
-        sample = [sample;ithData.time.sample];    
+        tthOfMil = [tthOfMil;ithData.time.tthOfMil];    
     end
     
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'sample',sample);
+    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'tthOfMil',tthOfMil);
     data = struct('pow',pow,'time',time,'att',att);
 end

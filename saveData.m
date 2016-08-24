@@ -16,7 +16,7 @@
 %                   time.hour     - hour of measure
 %                   time.minute   - minute of measure
 %                   time.second   - second of measure
-%                   time.sample   - number of sample
+%                   time.tthOfMil - number of tthOfMil
 %			att  - ARRAY OF FLOATS with attenuation levels of each measure
 %
 %       -> name, STRING name of file
@@ -35,9 +35,10 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	1
+% 	Code version:	2
+%   - v2: correction of "tthOfMil" time component
 %
-%	last edited in:	22/08/2016 					 
+%	last edited in:	24/08/2016 					 
 %									 
 %*********************************************************************** 
 function saveData(data,name,directory)
@@ -49,14 +50,14 @@ function saveData(data,name,directory)
     hour = num2str(data.time.hour,'%02i');
     minute = num2str(data.time.minute,'%02i');
     second = num2str(data.time.second,'%02i');
-    sample = num2str(data.time.sample,'%04i');
+    tthOfMil = num2str(data.time.tthOfMil,'%04i');
     
     %% create matrix
     n = length(hour);
     space = repmat('  ',[n 1]);
     comma = repmat(',',[n 1]);
     stop = repmat(':',[n 1]);
-    time = [hour stop minute stop second comma sample];
+    time = [hour stop minute stop second comma tthOfMil];
     outMatrix = [pow space time space att];
     
     %% write file

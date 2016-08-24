@@ -32,8 +32,9 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2
+% 	Code version:	3
 %   - v2: insertion of sample in "time" struct
+%   - v3: correction of "tthOfMil" time component
 %
 %	last edited in:	22/08/2016 					 
 %									 
@@ -55,9 +56,9 @@ function dataBlock = arrangeData(data,h1,h2)
     hour = data.time.hour(h1:h2);
     minute = data.time.minute(h1:h2);
     second = data.time.second(h1:h2);
-	sample = data.time.sample(h1:h2);
+	tthOfMil = data.time.tthOfMil(h1:h2);
 
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'sample',sample);
+    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'tthOfMil',tthOfMil);
     dataBlock = struct('pow',pow,'time',time,'att',att);
 end

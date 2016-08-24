@@ -23,11 +23,12 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	3
-%       - v2: name change
-%       - v3: insertion of sample in "time" struct
+% 	Code version:	4
+%   - v2: name change
+%   - v3: insertion of sample in "time" struct
+%   - v4: correction of "tthOfMil" time component
 %
-%	last edited in: 22/08/2016 					 
+%	last edited in: 24/08/2016 					 
 %									 
 %***********************************************************************
 
@@ -42,9 +43,9 @@ function newData = selectData(data,selectionVector)
     hour = data.time.hour(selectionVector);
     minute = data.time.minute(selectionVector);
     second = data.time.second(selectionVector);
-    sample = data.time.sample(selectionVector);
+    tthOfMil = data.time.tthOfMil(selectionVector);
 
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'sample',sample);
+    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'tthOfMil',tthOfMil);
     newData = struct('pow',pow,'time',time,'att',att);
 end

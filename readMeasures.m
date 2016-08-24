@@ -18,7 +18,7 @@
 %                   time.hour     - hour of measure
 %                   time.minute   - minute of measure
 %                   time.second   - second of measure
-%                   time.sample   - number of sample
+%                   time.tthOfMil - tenths of miliseconds
 %			att  - ARRAY OF FLOATS with attenuation levels of each measure
 %									 
 %	-> MATLAB version used:	
@@ -35,15 +35,16 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	8
+% 	Code version:	9
 %   - v2: addition of "myCell2Mat.m" script
 %   - v3: substitution of string "time" type for struct
 %   - v4: correction of "time" struct
 %   - v5: definition of "data" struct
 %   - v6: insertion of date in "time" struct
 %   - v7: insertion of sample in "time" struct
+%   - v8: correction of "tthOfMil" time component
 %
-%	last edited in:	22/08/2016 					 
+%	last edited in:	24/08/2016 					 
 %									 
 %*********************************************************************** 
 
@@ -70,7 +71,7 @@ function data = readMeasures(filePath)
     hour = str2num(rawTime(:,1:2));
     minute = str2num(rawTime(:,4:5));
     second = str2num(rawTime(:,7:8));
-    sample = str2num(rawTime(:,10:13));
+    tthOfMil = str2num(rawTime(:,10:13));
     
     %% extract date in fileName
     n = length(pow);
@@ -91,6 +92,6 @@ function data = readMeasures(filePath)
     day = day';
     
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'sample',sample);
+    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'tthOfMil',tthOfMil);
     data = struct('pow',pow,'time',time,'att',att);
 end
