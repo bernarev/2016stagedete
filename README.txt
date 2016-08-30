@@ -44,6 +44,10 @@
 -		account a deviation of "timeDeviation", saving the results in the	-
 -   		"indexes" matrix							-
 -											-
+-	- getBiggerValues.m								-
+-		Gets bigger value compared to its neighboring values 			-
+-		(MUST ONLY BE USED AFTER FINDING THE REAL SERIES)			-
+-											-
 -	- removeNoiseFromFile.m								-
 -		Select only data with power over "limit"				-
 -											-
