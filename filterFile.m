@@ -34,9 +34,10 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	1
+% 	Code version:	2
 %
-%	last edited in:	22/08/2016 					 
+%	last edited in:	24/08/2016 	
+%   - v2: correction of input time format in "findSeries" function
 %									 
 %***********************************************************************
 
@@ -54,7 +55,7 @@ function filterFile(inFile,outFile,timeScale,timeGap,timeDev)
     i = 1;
     while(i <= length(separatedData))
         ithData = separatedData{i};
-        idx = findSeries(ithData.time,timeGap,timeDev);
+        idx = findSeries(gsec(ithData.time),timeGap,timeDev);
         ithData = selectData(ithData,idx);
         newSeparatedData{i} = ithData;
         i = i+1;

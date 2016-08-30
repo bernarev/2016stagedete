@@ -35,32 +35,31 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2
+% 	Code version:	1
 %
-%	last edited in:	24/08/2016 
-%   - v2: correction of input time format
+%	last edited in:	18/08/2016 					 
 %									 
 %***********************************************************************
 
 function indexes = findSeries(timeVector,timeGap,timeDev)
     %% gets time from data as seconds
-    
+    %time = gsec(timeVector);
+    time = timeVector;
     % normalises time array
-    timeVector = timeVector - timeVector(1);
+    time = time - time(1);
     
     %% get gaps matrix
     % creates all possible combinations of time indexes
-    [Y, X] = meshgrid(1:length(timeVector));
+    [Y, X] = meshgrid(1:length(time));
     
     % creates matrix with the combinations of every gap
-    G = timeVector(X) - timeVector(Y);
+    G = time(X) - time(Y);
     G = abs(G);
     
     %% finding desired gaps
     % remove all gaps that are not multiple of "timeGap" 
     % with "timeDev" hysteresis
-    test = abs(mod(G, timeGap));
-    G(test > timeDev & test < timeGap - timeDev) = 0;
+    G(abs(mod(G, timeGap)) > timeDev & abs(mod(G, timeGap) < timeGap - timeDev) = 0;
     
     % creates a counter vector that counts all gaps that are not zeros
     % holds the number of elements in the relevant series of each 
