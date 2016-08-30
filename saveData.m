@@ -10,13 +10,13 @@
 %       -> data struct, containing the following 3 elements:
 %			pow  - ARRAY OF FLOATS with measures of power (in dB)
 %			time - ARRAY OF STRUCT with time of measures
-%                   time.year     - year of measure
-%                   time.month    - month of measure
-%                   time.day      - day of measure
-%                   time.hour     - hour of measure
-%                   time.minute   - minute of measure
-%                   time.second   - second of measure
-%                   time.tthOfMil - number of tthOfMil
+%                   time.YY   - year of measure
+%                   time.MM   - month of measure
+%                   time.DD   - day of measure
+%                   time.hh   - hour of measure
+%                   time.mm   - minute of measure
+%                   time.ss   - second of measure
+%                   time.ffff - tenths of miliseconds
 %			att  - ARRAY OF FLOATS with attenuation levels of each measure
 %
 %       -> name, STRING name of file
@@ -35,10 +35,11 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2
+% 	Code version:	3
 %   - v2: correction of "tthOfMil" time component
+%   - v3: modification of time structure component names
 %
-%	last edited in:	24/08/2016 					 
+%	last edited in:	30/08/2016 					 
 %									 
 %*********************************************************************** 
 function saveData(data,name,directory)
@@ -47,10 +48,10 @@ function saveData(data,name,directory)
     pow = num2str(data.pow,'%10.2f');
     att = num2str(data.att,'%10.2f');
     
-    hour = num2str(data.time.hour,'%02i');
-    minute = num2str(data.time.minute,'%02i');
-    second = num2str(data.time.second,'%02i');
-    tthOfMil = num2str(data.time.tthOfMil,'%04i');
+    hour = num2str(data.time.hh,'%02i');
+    minute = num2str(data.time.mm,'%02i');
+    second = num2str(data.time.ss,'%02i');
+    tthOfMil = num2str(data.time.ffff,'%04i');
     
     %% create matrix
     n = length(hour);

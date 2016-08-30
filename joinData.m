@@ -26,12 +26,13 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	4
+% 	Code version:	5
 %   - v2: name change
 %   - v3: insertion of sample in "time" struct
 %   - v4: correction of "tthOfMil" time component
+%   - v5: modification of time structure component names
 %
-%	last edited in: 24/08/2016 					 
+%	last edited in: 30/08/2016 					 
 %									 
 %***********************************************************************
 
@@ -54,16 +55,16 @@ function joinedData = joinData(separatedData)
         
         pow = [pow; ithData.pow];
         att = [att; ithData.att];
-        year = [year; ithData.time.year];
-        month = [month; ithData.time.month];
-        day = [day; ithData.time.day];
-        hour = [hour; ithData.time.hour];
-        minute = [minute; ithData.time.minute];
-        second = [second; ithData.time.second];
-        tthOfMil = [tthOfMil; ithData.time.tthOfMil];
+        year = [year; ithData.time.YY];
+        month = [month; ithData.time.MM];
+        day = [day; ithData.time.DD];
+        hour = [hour; ithData.time.hh];
+        minute = [minute; ithData.time.mm];
+        second = [second; ithData.time.ss];
+        tthOfMil = [tthOfMil; ithData.time.ffff];
     end
 
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'tthOfMil',tthOfMil);
+    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second,'ffff',tthOfMil);
     joinedData = struct('pow',pow,'time',time,'att',att);
 end

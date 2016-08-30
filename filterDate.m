@@ -31,8 +31,10 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	1						 
-%	last edited in:	04/08/2016 					 
+% 	Code version:	2	
+%   - v2: modification of time structure component names
+%
+%	last edited in:	30/08/2016 					 
 %									 
 %***********************************************************************
 
@@ -40,17 +42,17 @@ function newData = filterDate(data,selection,t1,t2)
 
 switch selection
     case 1
-        time = data.time.year;
+        time = data.time.yy;
     case 2
-        time = data.time.month;
+        time = data.time.mm;
     case 3
-        time = data.time.day;
+        time = data.time.dd;
     case 4
-        time = data.time.hour;
+        time = data.time.hh;
     case 5
-        time = data.time.minute;
+        time = data.time.mm;
     case 6
-        time = data.time.second;
+        time = data.time.ss;
     otherwise
         error('invalid selection (must be a number from 1 to 6)');
 end

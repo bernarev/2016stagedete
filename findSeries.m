@@ -9,13 +9,11 @@
 %		-> indexes = findSeries(timeVector,timeGap,timeDev)
 %
 %	-> inputs =
-%       -> data     - STRUC, containing the following 3 elements:
-%           = pow   - ARRAY OF FLOATS with measures of power (in dB)
-%           = time  - ARRAY OF STRUCT with time of measures
-%           = att   - ARRAY OF FLOATS with attenuation levels of each measure
+%       -> timeVector - ARRAY: time sequence
 %
 %		-> timeGap  - NUMBER: theoretical time distance between direct
 %       bursts
+%
 %		-> timeDev  - NUMBER: accepted deviation from timeGap
 %	
 %	-> outputs = 	
@@ -35,10 +33,11 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2
-%
-%	last edited in:	24/08/2016 
+% 	Code version:	3
 %   - v2: correction of input time format
+%   - v3: correction of documentation
+%
+%	last edited in:	30/08/2016 
 %									 
 %***********************************************************************
 

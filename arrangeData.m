@@ -32,11 +32,12 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	3
+% 	Code version:	4
 %   - v2: insertion of sample in "time" struct
 %   - v3: correction of "tthOfMil" time component
+%   - v4: modification of time structure component names
 %
-%	last edited in:	22/08/2016 					 
+%	last edited in:	30/08/2016 					 
 %									 
 %***********************************************************************
 
@@ -50,15 +51,15 @@ function dataBlock = arrangeData(data,h1,h2)
     pow = data.pow(h1:h2);
     att = data.att(h1:h2);
 
-    year = data.time.year(h1:h2);
-    month = data.time.month(h1:h2);
-    day = data.time.day(h1:h2);
-    hour = data.time.hour(h1:h2);
-    minute = data.time.minute(h1:h2);
-    second = data.time.second(h1:h2);
-	tthOfMil = data.time.tthOfMil(h1:h2);
+    year = data.time.YY(h1:h2);
+    month = data.time.MM(h1:h2);
+    day = data.time.DD(h1:h2);
+    hour = data.time.hh(h1:h2);
+    minute = data.time.mm(h1:h2);
+    second = data.time.ss(h1:h2);
+	tthOfMil = data.time.ffff(h1:h2);
 
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'tthOfMil',tthOfMil);
+    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second,'ffff',tthOfMil);
     dataBlock = struct('pow',pow,'time',time,'att',att);
 end

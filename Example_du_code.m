@@ -1,15 +1,15 @@
 %% selectionner et filtrer les fichiers désirés
 
 % fichier des mesures
-dataPath = '/home/ebernardes/Área de Trabalho/Mesures/';
+dataPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/';
 
 % fichier où les nouvelles données sont mises après l'enlèvement de
 % toutes les valeurs plus petites que le niveau de bruit "limit"
-dataPath1 = '/home/ebernardes/Área de Trabalho/Mesures/filter1/';
+dataPath1 = [dataPath 'filter1/'];
 
 % fichier où les données déjà filtrées selon le niveau de bruit seront
 % sauvegardées après trouver les vraies valeurs
-dataPath2 = '/home/ebernardes/Área de Trabalho/Mesures/filter2/';
+dataPath2 = [dataPath 'filter2/'];
 
 % selection des données désirées (le "*" fait que tous les jours seront
 % selectionés.)

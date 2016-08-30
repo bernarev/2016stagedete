@@ -12,13 +12,13 @@
 %       -> data struct, containing the following 3 elements:
 %			pow  - ARRAY OF FLOATS with measures of power (in dB)
 %			time - ARRAY OF STRUCT with time of measures
-%                   time.year     - year of measure
-%                   time.month    - month of measure
-%                   time.day      - day of measure
-%                   time.hour     - hour of measure
-%                   time.minute   - minute of measure
-%                   time.second   - second of measure
-%                   time.tthOfMil - tenths of miliseconds
+%                   time.YY   - year of measure
+%                   time.MM   - month of measure
+%                   time.DD   - day of measure
+%                   time.hh   - hour of measure
+%                   time.mm   - minute of measure
+%                   time.ss   - second of measure
+%                   time.ffff - tenths of miliseconds
 %			att  - ARRAY OF FLOATS with attenuation levels of each measure
 %									 
 %	-> MATLAB version used:	
@@ -43,8 +43,9 @@
 %   - v6: insertion of date in "time" struct
 %   - v7: insertion of sample in "time" struct
 %   - v8: correction of "tthOfMil" time component
+%   - v9: modification of time structure component names
 %
-%	last edited in:	24/08/2016 					 
+%	last edited in:	30/08/2016 					 
 %									 
 %*********************************************************************** 
 
@@ -92,6 +93,6 @@ function data = readMeasures(filePath)
     day = day';
     
     %% final definition of data structure
-    time = struct('year',year,'month',month,'day',day,'hour',hour,'minute',minute,'second',second,'tthOfMil',tthOfMil);
+    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second,'ffff',tthOfMil);
     data = struct('pow',pow,'time',time,'att',att);
 end

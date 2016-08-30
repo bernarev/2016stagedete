@@ -25,13 +25,14 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	3
+% 	Code version:	4
 %   - v2: changed parameter from "data" to "time"
 %   - v3: correction of "tthOfMil" time component
+%   - v4: modification of time structure component names
 %
-%	last edited in:	24/08/2016 					 
+%	last edited in:	30/08/2016 					 
 %									 
 %***********************************************************************
 function s = gsec(time)
-    s = time.second + time.minute*60 + time.hour*60*60 + time.tthOfMil/10000;
+    s = time.ss + time.mm*60 + time.hh*60*60 + time.ffff/10000;
 end
