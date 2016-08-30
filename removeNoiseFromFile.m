@@ -35,5 +35,5 @@ function removeNoiseFromFile(inFile,outFile,limit)
     data = readMeasures(inFile);
     selectionVector = data.pow >= limit;
     filteredData = selectData(data,selectionVector);
-    saveData(filteredData,'',outFile);
+    saveToFile(filteredData,'',outFile);
 end

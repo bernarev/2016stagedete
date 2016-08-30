@@ -63,5 +63,5 @@ function filterFile(inFile,outFile,timeScale,timeGap,timeDev)
     
     %% creation of new file
     newdata = joinData(newSeparatedData);
-    saveData(newdata,'',outFile);
+    saveToFile(newdata,'',outFile);
 end
