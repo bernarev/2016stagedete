@@ -1,64 +1,78 @@
 %*********************************************************************** 
 %									 
-%	-- Filter desired dates from data structure
+%	-- Delete data above a limit, divide into small sets of "timeScale" 
+%   size and tries to find the probable real data
 %
 %	-> Usage = 
-%		-> newData = filterData(data,selection,t1,t2)
+%		-> filteredData = filterData(data,limit,timeScale,timeGap,timeDev)
 %
 %	-> inputs =
-%		-> data - STRUCT with data
-%		-> selection - desired "time" element to test:
-%           1 -> year
-%           2 -> month
-%           3 -> day
-%           4 -> hour
-%           5 -> minute
-%           6 -> second
-%		-> t1 - low time limit
-%		-> t2 - high time limit
+%		-> data         - STRUCT containing data
+%       -> limit        - noise limit
+%		-> timeScale    - number defining size of each block 
+%       of data (in sec)
+%		-> timeGap  - NUMBER: theoretical time distance between direct
+%       bursts
+%		-> timeDev  - NUMBER: accepted deviation from timeGap
 %									 
 %	-> MATLAB version used:	
 %		- R2012b (8.0.0.783) 64-bit	
 %				 
 % 	-> Special toolboxes used: 
-%		-- none	--		
+%		-- none	--
 %
-% 	-> Other dependencies:  
-%		- selectFilterData.m	
+% 	-> Other dependencies: 
+%		- gsec.m
+%		- separateData.m
+%       - arrangeData.m
+%		- selectData.m
+%		- joinData.m
+%		- findSeries.m
+%       - getHighestValues.m
+%		- saveData.m
 %									 
 %	-> Created by Evandro Bernardes	 								 
 %		- at ENSTA Bretagne (Brest, Britanny, France)							 								 
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	1						 
-%	last edited in:	04/08/2016 					 
+% 	Code version:	2.0
+%
+%	last edited in:	24/08/2016 	
 %									 
 %***********************************************************************
 
-function newData = filterData(data,selection,t1,t2)
+function filteredData = filterData(data,limit,timeScale,timeGap,timeDev)
 
-switch selection
-    case 1
-        time = data.time.year;
-    case 2
-        time = data.time.month;
-    case 3
-        time = data.time.day;
-    case 4
-        time = data.time.hour;
-    case 5
-        time = data.time.minute;
-    case 6
-        time = data.time.second;
-    otherwise
-        error('invalid selection (must be a number from 1 to 6)');
-end
+    %% filtering out measures with power lower than limit
+    selectionVector = data.pow >= limit;
+    filteredData = selectData(data,selectionVector);
+    
+    %% loading of data and separation into small sets
+    separatedData = separateData(filteredData,timeScale);
+    
+    %% filtering of each small set
+    newSeparatedData = {}; % cell array with new filtered data
+
+    i = 1;
+    while(i <= length(separatedData))
+        ithData = separatedData{i};
         
-    % selection vector with zeros and ones
-    selectionVector = (time >= t1 & time <= t2);
-
-    % extractoin of desired data
-    newData = selectFilterData(data,selectionVector);
-
+        % filter out parasite data
+        idx = findSeries(gsec(ithData.time),timeGap,timeDev);
+        ithData = selectData(ithData,idx);
+        
+        % select only the highest values between adjacent data 
+        idx = getHighestValues(ithData,timeDev);
+        ithData = selectData(ithData,idx);
+        
+        % create new cell of separated data
+        newSeparatedData{i} = ithData;
+        
+        i = i+1;
+    end 
+    
+    %% creation of new file
+    newData = joinData(newSeparatedData);
+    
 end

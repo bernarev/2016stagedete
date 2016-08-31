@@ -1,7 +1,7 @@
 %*********************************************************************** 
 %									 
 %	-- reads "data" and saves its content at "directory" in multiple 
-%   .txt file, separing by date
+%   .txt files, separing by date
 %
 %	-> Usage = 
 %		-> saveData(data,directory)
@@ -18,7 +18,7 @@
 %		-- none	--
 %
 % 	-> Other dependencies: 
-%		-- none --
+%		- saveOneFile.m
 %									 
 %	-> Created by Evandro Bernardes	 								 
 %		- at ENSTA Bretagne (Brest, Britanny, France)							 								 
@@ -47,7 +47,7 @@ function saveData(data,directory)
         ithDate = uniqueDates(i,:);
         selectionVector = strcmp(ithDate,dates);
         selectedData = selectData(data,selectionVector);
-        saveToFile(selectedData,[ithDate '.txt'],directory);
+        saveOneFile(selectedData,[ithDate '.txt'],directory);
     end
 end
 
