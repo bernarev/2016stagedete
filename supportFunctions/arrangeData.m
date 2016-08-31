@@ -32,9 +32,10 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.0
+% 	Code version:	2.1
+%   - v2.1: removed "ffff" (tenths of miliseconds) from time structure
 %
-%	last edited in:	30/08/2016 					 
+%	last edited in:	31/08/2016 					 
 %									 
 %***********************************************************************
 
@@ -54,9 +55,8 @@ function dataBlock = arrangeData(data,h1,h2)
     hour = data.time.hh(h1:h2);
     minute = data.time.mm(h1:h2);
     second = data.time.ss(h1:h2);
-	tthOfMil = data.time.ffff(h1:h2);
 
     %% final definition of data structure
-    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second,'ffff',tthOfMil);
+    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second);
     dataBlock = struct('pow',pow,'time',time,'att',att);
 end

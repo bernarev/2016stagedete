@@ -25,11 +25,12 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.0
+% 	Code version:	2.1
+%   - v2.1: removed "ffff" (tenths of miliseconds) from time structure
 %
-%	last edited in:	30/08/2016 					 
+%	last edited in:	31/08/2016 					 
 %									 
 %***********************************************************************
 function s = gsec(time)
-    s = time.ss + time.mm*60 + time.hh*60*60 + time.ffff/10000;
+    s = time.ss + time.mm*60 + time.hh*60*60;
 end

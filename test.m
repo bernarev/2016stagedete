@@ -1,5 +1,5 @@
-readPath = 'Mesures/';
-savePath = 'Mesures/test/';
+readPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/';
+savePath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/test/';
 date = '1607*';
 %% read data
 data = readData(readPath,date);

@@ -22,7 +22,6 @@
 %                   time.hh   - hour of measure
 %                   time.mm   - minute of measure
 %                   time.ss   - second of measure
-%                   time.ffff - tenths of miliseconds
 %          = att  - ARRAY OF FLOATS with attenuation levels of each measure
 %
 %       -> fileNames ARRAY OF STRINGS with names of loaded files
@@ -42,9 +41,10 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.0
+% 	Code version:	2.1
+%   - v2.1: removed "ffff" (tenths of miliseconds) from time structure
 %
-%	last edited in:	30/08/2016 					 
+%	last edited in:	31/08/2016 						 
 %									 
 %***********************************************************************
 
@@ -63,7 +63,6 @@ function [data,fileNames] = readData(path,date)
     hour = [];
     minute = [];
     second = [];
-    tthOfMil = [];
     
     fileNames = {};
    
@@ -81,10 +80,10 @@ function [data,fileNames] = readData(path,date)
         hour = [hour;ithData.time.hh];
         minute = [minute;ithData.time.mm];
         second = [second;ithData.time.ss];
-        tthOfMil = [tthOfMil;ithData.time.ffff];    
     end
     
     %% final definition of data structure
-    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second,'ffff',tthOfMil);
+
+    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second);
     data = struct('pow',pow,'time',time,'att',att);
 end

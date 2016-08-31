@@ -18,7 +18,6 @@
 %                   time.hh   - hour of measure
 %                   time.mm   - minute of measure
 %                   time.ss   - second of measure
-%                   time.ffff - tenths of miliseconds
 %			att  - ARRAY OF FLOATS with attenuation levels of each measure
 %									 
 %	-> MATLAB version used:	
@@ -35,9 +34,10 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.0
+% 	Code version:	2.1
+%   - v2.1: removed "ffff" (tenths of miliseconds) from time structure
 %
-%	last edited in:	30/08/2016 					 
+%	last edited in:	31/08/2016 					 
 %									 
 %*********************************************************************** 
 
@@ -63,8 +63,10 @@ function data = readOneFile(filePath)
     
     hour = str2num(rawTime(:,1:2));
     minute = str2num(rawTime(:,4:5));
+    
     second = str2num(rawTime(:,7:8));
     tthOfMil = str2num(rawTime(:,10:13));
+    second = second + tthOfMil/10000;
     
     %% extract date in fileName
     n = length(pow);
@@ -85,6 +87,6 @@ function data = readOneFile(filePath)
     day = day';
     
     %% final definition of data structure
-    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second,'ffff',tthOfMil);
+    time = struct('YY',year,'MM',month,'DD',day,'hh',hour,'mm',minute,'ss',second);
     data = struct('pow',pow,'time',time,'att',att);
 end
