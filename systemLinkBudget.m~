@@ -3,13 +3,7 @@
 %	-- Simple script that loads all the chracteristic values of the system
 %   and calculates the air losses.
 %
-%   The type of the parameter must be one of the following:
-%   -p	Input power
-%   -l	Point losses in the system
-%   -g	Point gains in the system
-%
-%   Usually, there should only be one 'Input Power', but the program will accept
-%   more than one.
+%   FOR INFO IN HOW TO CREATE A SYSTEM FILE, SEE 
 %
 %	-> Usage = 
 %		-> [airLosses,systemInfo] = systemLinkBudget(data,systemFile)
@@ -58,13 +52,12 @@ function [airLosses,systemInfo] = systemLinkBudget(data,systemFile)
     
     pow = data.pow;
     att = data.att;
-    inputPower = sum(value(type == 'p'));    % input power
+    inputPower = value(type == 'p');    % input power
     otherGains = sum(value(type == 'g'));  % sum of gains
     otherLosses = sum(value(type == 'l'));  % sum of losses
     
     % calculated losses between the antennae
     airLosses = (inputPower + otherGains) - (pow + att + otherLosses);
-    airLosses = struct('value',airLosses,'time',data.time);
     
     % system info
     systemInfo = struct('type',type,'variable',variable,'value', value);
