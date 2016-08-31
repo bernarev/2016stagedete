@@ -27,15 +27,16 @@
 %		-- none	--
 %
 % 	-> Other dependencies: 
-%		-- none --
+%		- gtime.m
 %									 
 %	-> Created by Evandro Bernardes	 								 
 %		- at ENSTA Bretagne (Brest, Britanny, France)							 								 
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.1
+% 	Code version:	2.2
 %   - v2.1: removed "ffff" (tenths of miliseconds) from time structure
+%   - v2.2: addition of "gtime.m" function
 %
 %	last edited in:	31/08/2016 				 
 %									 
@@ -45,22 +46,11 @@ function saveOneFile(data,name,directory)
     %% get data to be stored in file
     pow = num2str(data.pow,'%10.2f');
     att = num2str(data.att,'%10.2f');
-    
-    hour = num2str(data.time.hh,'%02i');
-    minute = num2str(data.time.mm,'%02i');
-    
-    second = data.time.ss;
-    tthOfMil = int32(10000.*mod(second,1));
-    
-    second = num2str(floor(second),'%02i');
-    tthOfMil = num2str(tthOfMil,'%04i');
+    time = gtime(data.time,'ffff');
     
     %% create matrix
-    n = length(hour);
+    n = length(data.pow);
     space = repmat('  ',[n 1]);
-    comma = repmat(',',[n 1]);
-    stop = repmat(':',[n 1]);
-    time = [hour stop minute stop second comma tthOfMil];
     outMatrix = [pow space time space att];
     
     %% write file

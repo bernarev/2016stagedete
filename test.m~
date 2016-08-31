@@ -1,5 +1,4 @@
-readPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered/';
-savePath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered/';
+readPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered';
 date = '1607*';
 %% read data
 data = readData(readPath,date);
@@ -24,5 +23,5 @@ filterFiles(readPath,savePath,limit,timeScale,timeGap,timeDev,date);
 %%
 %date = gdate(data.time);
 
-t = gtime(data.time,'no');
+gtime(data.time);
 

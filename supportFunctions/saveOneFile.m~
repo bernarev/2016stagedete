@@ -46,21 +46,22 @@ function saveOneFile(data,name,directory)
     pow = num2str(data.pow,'%10.2f');
     att = num2str(data.att,'%10.2f');
     
-    hour = num2str(data.time.hh,'%02i');
-    minute = num2str(data.time.mm,'%02i');
+%     hour = num2str(data.time.hh,'%02i');
+%     minute = num2str(data.time.mm,'%02i');
     
-    second = data.time.ss;
-    tthOfMil = integer((10000.*mod(second,1)));
-    
-    second = num2str(data.time.ss,'%02i');
-    tthOfMil = num2str(tthOfMil,'%04i');
+%     second = data.time.ss;
+%     tthOfMil = int32(10000.*mod(second,1));
+%     
+%     second = num2str(floor(second),'%02i');
+%     tthOfMil = num2str(tthOfMil,'%04i');
+    time = gtime(data.time,'ffff');
     
     %% create matrix
-    n = length(hour);
-    space = repmat('  ',[n 1]);
-    comma = repmat(',',[n 1]);
-    stop = repmat(':',[n 1]);
-    time = [hour stop minute stop second comma tthOfMil];
+    n = length(data);
+    space = repmat('  ',n, 1);
+%     comma = repmat(',',[n 1]);
+%     stop = repmat(':',[n 1]);
+%     time = [hour stop minute stop second comma tthOfMil];
     outMatrix = [pow space time space att];
     
     %% write file
