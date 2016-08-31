@@ -1,6 +1,6 @@
 %*********************************************************************** 
 %									 
-%	-- Simple script that loads all the chracteristic values of the system
+%	-- Loads all the chracteristic values of the system
 %   and calculates the air losses.
 %
 %   The type of the parameter must be one of the following:

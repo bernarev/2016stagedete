@@ -30,7 +30,8 @@
 -   		and saves the output files at "pathOut"					-
 -											-
 -	- systemLinkBudget.m								-
--		Simple script that loads all the chracteristic values of the system	-
+-		Loads all the chracteristic values of the system			-
+-   		and calculates the air losses						-
 -----------------------------------------------------------------------------------------
 -	-> Subfunctions:								-
 -											-
