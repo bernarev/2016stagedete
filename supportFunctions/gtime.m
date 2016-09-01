@@ -3,13 +3,10 @@
 %	-- Simple script to get string array with times of measures
 %
 %	-> Usage = 
-%		-> timeString = gdate(time,option)
+%		-> timeString = gdate(time)
 %
 %	-> inputs =
 %       -> time   - STRUC containing data time
-%       -> option - STRING
-%               if option == 'ffff', return tenths of miliseconds too
-%               otherwise, return in the format hh:mm:ss
 %	
 %	-> outputs = 	
 %       -> timeString - ARRAY either in format hh:mm:ss or hh:mm:ss,ffff
@@ -28,13 +25,14 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.1
+% 	Code version:	2.2
 %   -v2.1: corrected format of hour to 2 digits
+%   -v2.2: removed option
 %
 %	last edited in:	01/09/2016 					 
 %									 
 %***********************************************************************
-function timeString = gtime(time,option)
+function timeString = gtime(time)
     n = length(time.YY);
     ddot = repmat(':',n,1);
 
@@ -43,11 +41,8 @@ function timeString = gtime(time,option)
 
     ss = num2str(floor(second),'%02i');
     
-    if(strcmp(option,'ffff'))
-        comma = repmat(',',n,1);
-        ffff = num2str(tthOfMil,'%04i');
-        timeString = [num2str(time.hh,'%02d') ddot num2str(time.mm,'%02d') ddot ss comma ffff];
-    else
-        timeString = [num2str(time.hh,'%02d') ddot num2str(time.mm,'%02d') ddot ss];
-    end
+    comma = repmat(',',n,1);
+    ffff = num2str(tthOfMil,'%04i');
+    timeString = [num2str(time.hh,'%02d') ddot num2str(time.mm,'%02d') ddot ss comma ffff];
+
 end

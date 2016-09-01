@@ -1,13 +1,14 @@
 %*********************************************************************** 
 %									 
-%	-- Plots data with dates in X Axis
+%	-- Plots data with time in X Axis. Time labels can be of any type
 %
 %	-> Usage = 
-%		-> plotWithDates(data,angle)
+%		-> plotWithTime(data,angle)
 %
 %	-> inputs =	
-%       -> data  - STRUCT containing data
-%       -> angle - rotation of label in DEGREES
+%       -> data         - ARRAY containing data
+%       -> timeLabels   - ARRAY OF STRINGS containing labels
+%       -> angle        - rotation of label in DEGREES
 %									 
 %	-> MATLAB version used:	
 %		- R2012b (8.0.0.783) 64-bit	
@@ -23,16 +24,17 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.0
+% 	Code version:	2.1
+%   -v2.1: changed input parameter from struct to data array
+%   -v2.2: changed function name from "plotWithDates" to "plotWithTime"
 %
 %	last edited in:	01/09/2016 					 
 %									 
 %***********************************************************************
-function plotWithDates(data,angle)
+function plotWithTime(data,timeLabels,angle)
     %% find dates in date time array
-    dates = gdate(data.time);
-    uniqueDates = cellstr(unique(dates,'rows'));
-    dateCells = cellstr(dates);
+    uniqueDates = cellstr(unique(timeLabels,'rows'));
+    dateCells = cellstr(timeLabels);
     
     %% find indexes of dates
     n = length(uniqueDates(:,1));
@@ -42,7 +44,7 @@ function plotWithDates(data,angle)
     end
     
     %% plot and set labels
-    plot(data.pow);
+    plot(data);
     set(gca,'XTick',XAxisPos);
     set(gca,'XTickLabel',uniqueDates);
     rotateXLabels(gca,angle);

@@ -34,11 +34,12 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.2
+% 	Code version:	2.3
 %   - v2.1: removed "ffff" (tenths of miliseconds) from time structure
 %   - v2.2: addition of "gtime.m" function
+%   - v2.3: removed option from "gtime.m" function
 %
-%	last edited in:	31/08/2016 				 
+%	last edited in:	01/09/2016 				 
 %									 
 %*********************************************************************** 
 function saveOneFile(data,name,directory)
@@ -46,7 +47,7 @@ function saveOneFile(data,name,directory)
     %% get data to be stored in file
     pow = num2str(data.pow,'%10.2f');
     att = num2str(data.att,'%10.2f');
-    time = gtime(data.time,'ffff');
+    time = gtime(data.time);
     
     %% create matrix
     n = length(data.pow);

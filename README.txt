@@ -83,6 +83,9 @@
 -											-
 -	- separatedata.m								-
 -		Separate data into blocks accoarding to desired time window		-
+-											-
+-	- plotWithDates.m								-
+-		Plots data with dates in X Axis						-
 -----------------------------------------------------------------------------------------
 -	-> Other Files:									-
 -											-
