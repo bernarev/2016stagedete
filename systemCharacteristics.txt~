@@ -9,12 +9,13 @@
 % -l	Point losses in the system (in dB)
 % -g	Point gains in the system (in dB)
 % 
-% 	Example:
-% 	The following line:
+% 	|Example:						|
+% 	|The following line:					|	
+%	|							|
+% 	|-l example_loss 50					|
+%	|							|
+% 	|will add a loss parameter of 50 dB in the system	|
 %
-% 	-l example_loss 50
-%
-% 	will add a loss parameter of 50 dB in the system
 % 
 % Usually, there should only be one 'Input Power', but the program will accept
 % more than one (summing up each value found).

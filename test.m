@@ -1,5 +1,6 @@
 readPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered/';
 savePath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered/';
+configFile = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Codes/systemCharacteristics.txt';
 date = '1607*';
 %% read data
 data = readData(readPath,date);

@@ -1,3 +1,4 @@
+%--------------------------------------------------------------------------------------------
 % Configuration file used by "systemLinkBudget.m"
 %
 % Use this file to store the values of input power, loss and gain within the system.
@@ -19,10 +20,16 @@
 % 
 % Usually, there should only be one 'Input Power', but the program will accept
 % more than one (summing up each value found).
-
+%--------------------------------------------------------------------------------------------
+% Input power
 -p 	Input_Power 			55
+%--------------------------------------------------------------------------------------------
+% Emission
 -l 	Losses_at_Cables		01
 -g 	Transmission_Antenna_Gain	30
+%--------------------------------------------------------------------------------------------
+% Reception
 -g 	Reception_Antenna_Gain		24
 -l 	Other_Loss			3.5
 -g 	Amplifier			24.3
+%--------------------------------------------------------------------------------------------

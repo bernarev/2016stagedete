@@ -1,7 +1,6 @@
 %*********************************************************************** 
 %									 
-%	-- Loads all the chracteristic values of the system
-%   and calculates the air losses.
+%	-- Loads all the chracteristic values of the system.
 %
 %   The type of the parameter must be one of the following:
 %   -p	Input power
@@ -12,16 +11,15 @@
 %   more than one.
 %
 %	-> Usage = 
-%		-> [airLosses,systemInfo] = systemLinkBudget(data,systemFile)
+%		-> systemInfo = loadSystemInfo(data,systemFile)
 %
 %	-> inputs =
-%       -> system - STRING pointing to the path of the .txt file that
+%       -> systemFile - STRING pointing to the path of the .txt file that
 %       stores the system characteristics
-%		-> pow  - ARRAY OF FLOATS with measures of power (in dB)
-%		-> att  - ARRAY OF FLOATS with attenuation levels of each measure
+%		-> data       - STRUCT containing data 
 %	
 %	-> outputs = 	
-%		-> [airLosses,systemInfo] = systemLinkBudget(data,systemFile)
+%		-> systemInfo - STRUCT containing system info
 %								 
 %	-> MATLAB version used:	
 %		- R2012b (8.0.0.783) 64-bit	
@@ -39,7 +37,7 @@
 %									 
 % 	Code version:	2.0
 %
-%	last edited in:	30/08/2016 					 
+%	last edited in:	01/09/2016 					 
 %									 
 %*********************************************************************** 
 function [airLosses,systemInfo] = systemLinkBudget(data,systemFile)
