@@ -1,29 +1,23 @@
-readPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered/';
-savePath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered/';
+rawPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/';
+filteredPath = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Mesures/filtered/';
 configFile = '/home/ebernardes/Dropbox/ENSTA/Stage dete/Codes/systemCharacteristics.txt';
+sysInfo = getSysInfo(configFile);
 date = '1607*';
 %% read data
-data = readData(readPath,date);
-
+data = readData(filteredPath,'1607*');
 %% save data
-saveData(data,savePath);
+saveData(data,filteredPath);
 
 %% filter data
 limit = -64;
 timeScale = 16;
 timeGap = 4;
 timeDev = 0.3;
-newData = filterData(data,limit,timeScale,timeGap,timeDev);
-
-%% filter files
-% of handling too much data at the same time, it might be a better idea
-% to use "filterFiles.m" first to filter all data and save each file 
-% individually, reloading them and using them afterwards.
-% This doesn't overload the computer's memory
-filterFiles(readPath,savePath,limit,timeScale,timeGap,timeDev,date);
-
+%newData = filterData(data,limit,timeScale,timeGap,timeDev);
+filterFiles(rawPath,filteredPath,limit,timeScale,timeGap,timeDev,'16*');
 %%
-%date = gdate(data.time);
-
-t = gtime(data.time,'no');
+dates = gdate(data.time);
+loss = getAirLosses(data,sysInfo);
+plotWithDates(loss)
+%hold on;
 

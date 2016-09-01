@@ -1,6 +1,6 @@
 %*********************************************************************** 
 %									 
-%	-- Calculates air loss.
+%	-- Calculates air loss
 %
 %   The type of the parameter must be one of the following:
 %   -p	Input power
@@ -43,7 +43,6 @@
 function airLosses = getAirLosses(data,systemInfo)
   
     type = systemInfo.type;
-    variable = systemInfo.variable;
     value = systemInfo.value;
     
     pow = data.pow;
@@ -54,5 +53,5 @@ function airLosses = getAirLosses(data,systemInfo)
     
     % calculated losses between the antennae
     airLosses = (inputPower + otherGains) - (pow + att + otherLosses);
-    airLosses = struct('value',airLosses,'time',data.time);
+    airLosses = struct('pow',airLosses,'time',data.time);
 end

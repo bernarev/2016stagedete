@@ -1,6 +1,6 @@
 %*********************************************************************** 
 %									 
-%	-- Loads all the chracteristic values of the system.
+%	-- Loads all the chracteristic values of the system
 %
 %   The type of the parameter must be one of the following:
 %   -p	Input power

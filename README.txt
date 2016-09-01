@@ -8,6 +8,16 @@
 -					 						-
 -	-> Special toolboxes used: 							-
 -		- Statistics Toolbox (Version 8.1)					-
+-											-
+-	-> Other dependencies:								-
+-											-										-
+-		- rotateXLabels.m							-
+-			rotates all XLabels on axes AX by an angle			-
+-			ANGLE (in degrees). Handles to the resulting text objects 	-
+-			are returned in HH.						-
+-		CREATED BY: Ben Tordoff							-
+-		Mathworks profile:							-
+-		matlabcentral/profile/authors/1297191-ben-tordoff			-
 -----------------------------------------------------------------------------------------
 -	-> Main functions:								-
 -											-
@@ -29,9 +39,11 @@
 -		Applies "filterData.m" to a set of desired files at "pathIn"		-
 -   		and saves the output files at "pathOut"					-
 -											-
--	- systemLinkBudget.m								-
+-	- getSysInfo.m									-
 -		Loads all the chracteristic values of the system			-
--   		and calculates the air losses						-
+-											-
+-	- getAirLosses.m								-
+-		Calculates air loss							-
 -----------------------------------------------------------------------------------------
 -	-> Subfunctions:								-
 -											-
@@ -82,5 +94,5 @@
 -											-
 -		- In association with: 							-
 -			ANFR - Agence Nationale de Fréquence    		 	-
--		- last edited in: 30/08/2016						-
+-		- last edited in: 01/09/2016						-
 -----------------------------------------------------------------------------------------

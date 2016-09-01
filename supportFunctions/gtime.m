@@ -28,9 +28,10 @@
 %		- In association with: 
 %			ANFR - Agence Nationale de Fréquence    		 
 %									 
-% 	Code version:	2.0
+% 	Code version:	2.1
+%   -v2.1: corrected format of hour to 2 digits
 %
-%	last edited in:	31/08/2016 					 
+%	last edited in:	01/09/2016 					 
 %									 
 %***********************************************************************
 function timeString = gtime(time,option)
@@ -45,8 +46,8 @@ function timeString = gtime(time,option)
     if(strcmp(option,'ffff'))
         comma = repmat(',',n,1);
         ffff = num2str(tthOfMil,'%04i');
-        timeString = [num2str(time.hh) ddot num2str(time.mm,'%02d') ddot ss comma ffff];
+        timeString = [num2str(time.hh,'%02d') ddot num2str(time.mm,'%02d') ddot ss comma ffff];
     else
-        timeString = [num2str(time.hh) ddot num2str(time.mm,'%02d') ddot ss];
+        timeString = [num2str(time.hh,'%02d') ddot num2str(time.mm,'%02d') ddot ss];
     end
 end
