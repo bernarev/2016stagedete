@@ -2,7 +2,7 @@
 % Configuration file used by "systemLinkBudget.m"
 %
 % Use this file to store the values of input power, loss and gain within the system.
-% Each line must contain three elements, separated by spaces: the type, name and 
+% Each line must contain three elements, separated by spaces: type, name and 
 % value of each parameter. 
 %
 % The type of the parameter must be one of the following:

@@ -3,7 +3,7 @@
 %	-- Plots data with time in X Axis. Time labels can be of any type
 %
 %	-> Usage = 
-%		-> plotWithTime(data,angle)
+%		-> plotWithTime(data,timeLabels,angle)
 %
 %	-> inputs =	
 %       -> data         - ARRAY containing data
